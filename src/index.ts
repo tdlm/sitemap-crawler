@@ -45,9 +45,9 @@ program
     try {
       sitemaps = await fetchSitemaps(url);
     } catch (err) {
-      console.error(
-        chalk.red(`Fatal: ${err instanceof Error ? err.message : err}`),
-      );
+      const msg = err instanceof Error ? err.message : String(err);
+      const cause = err instanceof Error && err.cause instanceof Error ? err.cause.message : '';
+      console.error(chalk.red(`Fatal: ${msg}${cause ? `: ${cause}` : ''}`));
       process.exit(1);
     }
 

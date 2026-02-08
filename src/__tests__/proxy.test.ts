@@ -34,6 +34,7 @@ describe('initializeProxy', () => {
     expect(ProxyAgent).toHaveBeenCalledWith({
       uri: 'http://proxy.zyte.com:8011',
       token: expectedToken,
+      requestTls: { rejectUnauthorized: false },
     });
   });
 
