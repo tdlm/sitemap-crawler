@@ -23,5 +23,8 @@ Thumbs.db
 # Debug logs
 *.log
 
+# Test coverage
+coverage/
+
 # Generated reports
 report.csv

@@ -13,7 +13,7 @@ export function createMultiBar() {
   );
 }
 
-function colorStatus(code: number): string {
+export function colorStatus(code: number): string {
   if (code === 0) return chalk.red('ERR');
   if (code >= 200 && code < 300) return chalk.green(String(code));
   if (code >= 300 && code < 400) return chalk.yellow(String(code));

@@ -1,7 +1,7 @@
 import pLimit from 'p-limit';
 import type { Sitemap, UrlCheckResult } from './types.js';
 
-async function fetchWithRedirects(
+export async function fetchWithRedirects(
   url: string,
   method: 'HEAD' | 'GET',
   timeout: number,
@@ -32,7 +32,7 @@ async function fetchWithRedirects(
   }
 }
 
-async function checkUrl(
+export async function checkUrl(
   url: string,
   timeout: number,
   maxRedirects: number,

@@ -8,7 +8,7 @@ const parser = new XMLParser({
   isArray: (name) => name === 'sitemap' || name === 'url',
 });
 
-function parseUrls(urlset: any): SitemapUrl[] {
+export function parseUrls(urlset: any): SitemapUrl[] {
   const urls: any[] = urlset?.url ?? [];
   return urls.map((u: any) => ({
     loc: u.loc,
@@ -34,7 +34,7 @@ async function fetchXml(url: string): Promise<string> {
   return res.text();
 }
 
-async function parseSitemap(url: string, xml: string): Promise<Sitemap> {
+export async function parseSitemap(url: string, xml: string): Promise<Sitemap> {
   const parsed = parser.parse(xml);
   const urlset = parsed.urlset;
   if (!urlset) {
