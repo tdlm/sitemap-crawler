@@ -20,12 +20,18 @@ importers:
       csv-stringify:
         specifier: ^6.5.0
         version: 6.6.0
+      dotenv:
+        specifier: ^17.2.4
+        version: 17.2.4
       fast-xml-parser:
         specifier: ^4.4.0
         version: 4.5.3
       p-limit:
         specifier: ^6.1.0
         version: 6.2.0
+      undici:
+        specifier: ^7.21.0
+        version: 7.21.0
     devDependencies:
       '@types/cli-progress':
         specifier: ^3.11.6
@@ -459,6 +465,10 @@ packages:
   csv-stringify@6.6.0:
     resolution: {integrity: sha512-YW32lKOmIBgbxtu3g5SaiqWNwa/9ISQt2EcgOq0+RAIFufFp9is6tqNnKahqE5kuKvrnYAzs28r+s6pXJR8Vcw==}
 
+  dotenv@17.2.4:
+    resolution: {integrity: sha512-mudtfb4zRB4bVvdj0xRo+e6duH1csJRM8IukBqfTRvHotn9+LBXB8ynAidP9zHqoRC/fsllXgk4kCKlR21fIhw==}
+    engines: {node: '>=12'}
+
   emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
 
@@ -628,6 +638,10 @@ packages:
 
   undici-types@6.21.0:
     resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
+
+  undici@7.21.0:
+    resolution: {integrity: sha512-Hn2tCQpoDt1wv23a68Ctc8Cr/BHpUSfaPYrkajTXOS9IKpxVRx/X5m1K2YkbK2ipgZgxXSgsUinl3x+2YdSSfg==}
+    engines: {node: '>=20.18.1'}
 
   vite@7.3.1:
     resolution: {integrity: sha512-w+N7Hifpc3gRjZ63vYBXA56dvvRlNWRczTdmCBBa+CotUzAPf5b7YMdMR/8CQoeYE5LX3W4wj6RYTgonm1b9DA==}
@@ -985,6 +999,8 @@ snapshots:
 
   csv-stringify@6.6.0: {}
 
+  dotenv@17.2.4: {}
+
   emoji-regex@8.0.0: {}
 
   es-module-lexer@1.7.0: {}
@@ -1174,6 +1190,8 @@ snapshots:
   typescript@5.9.3: {}
 
   undici-types@6.21.0: {}
+
+  undici@7.21.0: {}
 
   vite@7.3.1(@types/node@20.19.33)(tsx@4.21.0):
     dependencies:

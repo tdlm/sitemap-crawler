@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 
+import 'dotenv/config';
 import { Command } from 'commander';
 import chalk from 'chalk';
 import { fetchSitemaps } from './sitemap.js';
 import { checkUrls } from './checker.js';
 import { createMultiBar, printReport } from './output.js';
 import { writeCsvReport } from './csv-report.js';
+import { initializeProxy } from './proxy.js';
 import type { SitemapReport } from './types.js';
 
 const program = new Command();
@@ -20,6 +22,7 @@ program
   .option('-t, --timeout <ms>', 'per-request timeout in ms', '10000')
   .option('-r, --max-redirects <n>', 'max redirects to follow per URL', '3')
   .option('-d, --delay <ms>', 'delay in ms between requests', '10')
+  .option('--proxy-url <url>', 'proxy URL for Zyte SPM', 'http://proxy.zyte.com:8011')
   .action(async (url: string, opts) => {
     const concurrency = parseInt(opts.concurrency, 10);
     const timeout = parseInt(opts.timeout, 10);
@@ -27,6 +30,14 @@ program
     const delay = parseInt(opts.delay, 10);
     const verbose: boolean = opts.verbose ?? false;
     const csvPath: string | undefined = opts.csv;
+    const proxyUrl: string = opts.proxyUrl;
+
+    // Initialize proxy if ZYTE_API_KEY is set
+    const apiKey = process.env.ZYTE_API_KEY;
+    if (apiKey) {
+      initializeProxy(apiKey, proxyUrl);
+      console.log(chalk.cyan(`Proxy active: ${proxyUrl}`));
+    }
 
     // Fetch and parse sitemaps
     console.log(chalk.cyan(`Fetching sitemap: ${url}`));
