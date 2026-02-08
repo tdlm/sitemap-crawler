@@ -19,7 +19,7 @@ program
   .option('-c, --concurrency <n>', 'max concurrent requests', '10')
   .option('-t, --timeout <ms>', 'per-request timeout in ms', '10000')
   .option('-r, --max-redirects <n>', 'max redirects to follow per URL', '3')
-  .option('-d, --delay <ms>', 'delay in ms between requests', '0')
+  .option('-d, --delay <ms>', 'delay in ms between requests', '10')
   .action(async (url: string, opts) => {
     const concurrency = parseInt(opts.concurrency, 10);
     const timeout = parseInt(opts.timeout, 10);
