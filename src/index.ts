@@ -22,7 +22,7 @@ program
   .option('-t, --timeout <ms>', 'per-request timeout in ms', '10000')
   .option('-r, --max-redirects <n>', 'max redirects to follow per URL', '3')
   .option('-d, --delay <ms>', 'delay in ms between requests', '10')
-  .option('--proxy-url <url>', 'proxy URL for Zyte SPM', 'http://proxy.zyte.com:8011')
+  .option('-p, --proxy-url [url]', 'enable Zyte proxy (optionally specify URL)', 'http://proxy.zyte.com:8011')
   .action(async (url: string, opts) => {
     const concurrency = parseInt(opts.concurrency, 10);
     const timeout = parseInt(opts.timeout, 10);
@@ -30,11 +30,11 @@ program
     const delay = parseInt(opts.delay, 10);
     const verbose: boolean = opts.verbose ?? false;
     const csvPath: string | undefined = opts.csv;
-    const proxyUrl: string = opts.proxyUrl;
 
     // Initialize proxy if ZYTE_API_KEY is set
     const apiKey = process.env.ZYTE_API_KEY;
     if (apiKey) {
+      const proxyUrl = typeof opts.proxyUrl === 'string' ? opts.proxyUrl : 'http://proxy.zyte.com:8011';
       initializeProxy(apiKey, proxyUrl);
       console.log(chalk.cyan(`Proxy active: ${proxyUrl}`));
     }

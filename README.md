@@ -53,7 +53,7 @@ cp .env.example .env
 pnpm crawl https://example.com/sitemap.xml
 
 # Use a custom proxy URL
-pnpm crawl --proxy-url http://localhost:8011 https://example.com/sitemap.xml
+pnpm crawl -p http://localhost:8011 https://example.com/sitemap.xml
 ```
 
 ## CLI Options
@@ -71,7 +71,7 @@ Options:
   -t, --timeout <ms>       per-request timeout in ms (default: 10000)
   -r, --max-redirects <n>  max redirects to follow per URL (default: 3)
   -d, --delay <ms>         delay in ms between requests (default: 10)
-  --proxy-url <url>        proxy URL for Zyte SPM (default: http://proxy.zyte.com:8011)
+  -p, --proxy-url [url]    enable Zyte proxy, optionally specify URL (default: http://proxy.zyte.com:8011)
   -h, --help               display help
 ```
 
