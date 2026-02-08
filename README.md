@@ -24,30 +24,27 @@ pnpm build
 ## Usage
 
 ```bash
-# Using tsx (development)
+# Run compiled version (requires pnpm build first)
+pnpm crawl <url>
+
+# Run in development mode (no build needed)
 pnpm dev <url>
-
-# Using compiled output
-pnpm start <url>
-
-# Direct invocation
-pnpm tsx src/index.ts <url>
 ```
 
 ### Examples
 
 ```bash
 # Basic crawl with summary output
-pnpm tsx src/index.ts https://www.sitemaps.org/sitemap.xml
+pnpm crawl https://www.sitemaps.org/sitemap.xml
 
 # Verbose output showing every URL
-pnpm tsx src/index.ts -v https://www.sitemaps.org/sitemap.xml
+pnpm crawl -v https://www.sitemaps.org/sitemap.xml
 
 # Export results to CSV
-pnpm tsx src/index.ts --csv report.csv https://www.sitemaps.org/sitemap.xml
+pnpm crawl --csv report.csv https://www.sitemaps.org/sitemap.xml
 
 # Custom concurrency and timeout
-pnpm tsx src/index.ts -c 20 -t 5000 https://example.com/sitemap.xml
+pnpm crawl -c 20 -t 5000 https://example.com/sitemap.xml
 ```
 
 ## CLI Options

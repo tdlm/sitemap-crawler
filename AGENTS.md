@@ -3,10 +3,10 @@
 ## Commands
 
 ```bash
-pnpm install          # Install dependencies
-pnpm dev <url>        # Run in development mode with tsx
-pnpm build            # Compile TypeScript to dist/
-pnpm tsx src/index.ts # Direct execution
+pnpm install      # Install dependencies
+pnpm build        # Compile TypeScript to dist/
+pnpm crawl <url>  # Run compiled version
+pnpm dev <url>    # Run in development mode with tsx
 ```
 
 ## Architecture
