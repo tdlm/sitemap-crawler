@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import 'dotenv/config';
-import { join } from 'node:path';
+import { basename, resolve } from 'node:path';
 import { Command } from 'commander';
 import chalk from 'chalk';
 import { fetchSitemaps } from './sitemap.js';
@@ -10,6 +10,41 @@ import { createMultiBar, printReport } from './output.js';
 import { writeCsvReport } from './csv-report.js';
 import { initializeProxy } from './proxy.js';
 import type { SitemapReport } from './types.js';
+
+function parsePositiveInt(value: string, name: string): number {
+  const n = parseInt(value, 10);
+  if (!Number.isFinite(n) || n < 1) {
+    console.error(chalk.red(`Error: --${name} must be a positive integer, got "${value}"`));
+    process.exit(1);
+  }
+  return n;
+}
+
+function parseNonNegativeInt(value: string, name: string): number {
+  const n = parseInt(value, 10);
+  if (!Number.isFinite(n) || n < 0) {
+    console.error(chalk.red(`Error: --${name} must be a non-negative integer, got "${value}"`));
+    process.exit(1);
+  }
+  return n;
+}
+
+function safeCsvPath(input: string): string {
+  // Strip directory components — only the filename is used
+  const filename = basename(input);
+  if (!filename || filename === '.' || filename === '..') {
+    console.error(chalk.red(`Error: invalid CSV filename "${input}"`));
+    process.exit(1);
+  }
+  const reportsDir = resolve('reports');
+  const resolved = resolve(reportsDir, filename);
+  // Belt-and-suspenders: ensure the resolved path is inside reports/
+  if (!resolved.startsWith(reportsDir + '/') && resolved !== reportsDir) {
+    console.error(chalk.red(`Error: invalid CSV filename "${input}"`));
+    process.exit(1);
+  }
+  return resolved;
+}
 
 const program = new Command();
 
@@ -26,14 +61,14 @@ program
   .option('--max-retries <n>', 'max retries for 503/timeout errors', '3')
   .option('-p, --proxy-url [url]', 'enable Zyte proxy (optionally specify URL)', 'http://proxy.zyte.com:8011')
   .action(async (url: string, opts) => {
-    const concurrency = parseInt(opts.concurrency, 10);
-    const timeout = parseInt(opts.timeout, 10);
-    const maxRedirects = parseInt(opts.maxRedirects, 10);
-    const delay = parseInt(opts.delay, 10);
-    const maxRetries = parseInt(opts.maxRetries, 10);
+    const concurrency = parsePositiveInt(opts.concurrency, 'concurrency');
+    const timeout = parsePositiveInt(opts.timeout, 'timeout');
+    const maxRedirects = parsePositiveInt(opts.maxRedirects, 'max-redirects');
+    const delay = parseNonNegativeInt(opts.delay, 'delay');
+    const maxRetries = parseNonNegativeInt(opts.maxRetries, 'max-retries');
     const verbose: boolean = opts.verbose ?? false;
     const csvPath: string | undefined = opts.csv
-      ? join('reports', opts.csv)
+      ? safeCsvPath(opts.csv)
       : undefined;
 
     // Initialize proxy if ZYTE_API_KEY is set
