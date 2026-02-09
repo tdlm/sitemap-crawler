@@ -20,7 +20,7 @@ TODOS are available in TODOS.md. Remove items from TODOS.md as they are complete
 | File | Responsibility |
 |------|---------------|
 | `src/index.ts` | CLI entry point — Commander setup, orchestration |
-| `src/types.ts` | Shared TypeScript interfaces |
+| `src/types.ts` | Shared TypeScript types |
 | `src/sitemap.ts` | Fetch & parse sitemap XML / sitemap index |
 | `src/checker.ts` | HTTP status checking with p-limit concurrency |
 | `src/output.ts` | Progress bars (cli-progress) + report printing (chalk) |

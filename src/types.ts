@@ -1,30 +1,30 @@
-export interface SitemapUrl {
+export type SitemapUrl = {
   loc: string;
   lastmod?: string;
   changefreq?: string;
   priority?: number;
-}
+};
 
-export interface Sitemap {
+export type Sitemap = {
   name: string;
   urls: SitemapUrl[];
-}
+};
 
-export interface UrlCheckResult {
+export type UrlCheckResult = {
   url: string;
   statusCode: number;
   error?: string;
-}
+};
 
-export interface SitemapReport {
+export type SitemapReport = {
   sitemap: Sitemap;
   results: UrlCheckResult[];
-}
+};
 
-export interface CrawlOptions {
+export type CrawlOptions = {
   concurrency: number;
   timeout: number;
   maxRedirects: number;
   verbose: boolean;
   csv?: string;
-}
+};
