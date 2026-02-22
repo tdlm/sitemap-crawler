@@ -1,6 +1,6 @@
 {
   "name": "sitemap-crawl",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "CLI tool that crawls sitemap XML files and checks HTTP status of every URL",
   "type": "module",
   "bin": {
