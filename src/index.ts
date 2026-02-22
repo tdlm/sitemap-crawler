@@ -122,7 +122,7 @@ program
         maxRetries,
         () => bar.increment(),
         (attempt, count) => {
-          console.log(chalk.yellow(`  Retry ${attempt}/${maxRetries}: ${count} URL(s) with retryable errors`));
+          multiBar.log(chalk.yellow(`  Retry ${attempt}/${maxRetries}: ${count} URL(s) with retryable errors\n`));
         },
       );
 
